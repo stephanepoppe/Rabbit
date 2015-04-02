@@ -14,13 +14,16 @@ echo 'Waiting for messages. To exit press CTRL+C', "\n";
 
 $callback = function(AMQPMessage $message) {
 	echo 'consuming... ' . $message->body . "\n";
+	sleep(3);
+	$message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
+	echo 'done ' . $message->delivery_info['delivery_tag'] . "\n";
 };
 
 $channel->basic_consume(
 	'worker_queue',
 	'test_consumer',
 	false,
-	true,   // No-ack - if false, auto-acknowledge msgs
+	false,   // Auto ack, true = sends an acknowledgment
 	false,  // Exclusive - no other consumers can use Queue
 	false,
 	$callback
