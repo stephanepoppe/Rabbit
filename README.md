@@ -10,6 +10,7 @@ Install
 composer install
 ~~~~
 
+What's included?
 
 * Basic queuing
 * Exchanges:
