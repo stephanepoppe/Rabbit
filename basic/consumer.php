@@ -14,7 +14,7 @@ echo 'Waiting for messages. To exit press CTRL+C', "\n";
 
 $callback = function(AMQPMessage $message) {
 	echo 'consuming... ' . $message->body . "\n";
-	sleep(3);
+	sleep(5);
 	$message->delivery_info['channel']->basic_ack($message->delivery_info['delivery_tag']);
 	echo 'done ' . $message->delivery_info['delivery_tag'] . "\n";
 };
